@@ -1,0 +1,431 @@
+// PrettyTable.module.scss
+.pretty-table {
+	width: 95vw;
+	height: 95vh;
+	background-color: rgba(255, 255, 255, 0.3);
+	box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+	border-radius: 16px;
+	overflow: hidden;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	position: absolute; // 使用绝对定位使元素脱离文档流
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+
+	.highlighted {
+		animation: glowFadeOut 2s ease-out forwards;
+	}
+
+	@keyframes glowFadeOut {
+		0% {
+			background-color: rgba(255, 255, 0, 0.5); // Glowing color
+			box-shadow: 0 0 10px rgba(255, 255, 0, 0.75); // Glowing effect
+		}
+
+		100% {
+			background-color: inherit; // Fade to original background color
+			box-shadow: none; // Remove the glow effect
+		}
+	}
+
+
+	@keyframes fadeInUp {
+		from {
+			opacity: 0;
+			transform: translateX(-30px);
+		}
+
+		to {
+			opacity: 1;
+			transform: translateX(0);
+		}
+	}
+
+	@keyframes fadeIn {
+		from {
+			opacity: 0;
+			transform: translateY(20px);
+		}
+
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+
+	@keyframes fadeTextIn {
+		from {
+			opacity: 0;
+			transform: translateX(20px);
+		}
+
+		to {
+			opacity: 1;
+			transform: translateX(0);
+		}
+	}
+
+	@keyframes fadeSeachIn {
+		from {
+			opacity: 0;
+			transform: translateX(40px);
+		}
+
+		to {
+			opacity: 1;
+			transform: translateX(0);
+		}
+	}
+
+
+
+	&__header {
+		width: 100%;
+		height: 8%;
+		background-color: rgba(255, 255, 255, 0.2);
+		padding: 0 40px;
+		display: flex;
+		margin-left: 2%;
+		color: #0842a0;
+		justify-content: flex-end; // 将内容推向最右边
+		padding-right: 40px; // 保持与表格右侧的内边距一致
+		justify-content: space-between;
+		align-items: center;
+
+		h1 {
+			margin: 0; // 移除默认的 margin
+			font-size: 40px;
+			padding-left: 40px; // 根据实际情况调整，使 h1 与表格对齐
+			animation: fadeInUp 0.8s ease-out forwards; // 应用动画
+			margin-bottom: 0.2em;
+		}
+
+		h1:hover {
+			text-shadow: 0px 0px 2px #0842a0;
+		}
+
+		& .header-content {
+			// 新增样式用于包裹标题和描述
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+		}
+
+		& .description {
+			// 样式用于描述文本
+
+			margin-left: 20px; // 与标题的间距
+			color: #743481; // 描述信息的字体颜色
+			font-size: 18px; // 描述信息的字体大小
+			margin-bottom: 0.3em;
+			animation: fadeInUp 0.9s ease-out forwards; // 应用动画
+		}
+
+		& .description:hover {
+			text-shadow: 0px 0px 2px #743481;
+		}
+
+		&__input-group {
+			width: 35vw;
+			height: 70%;
+			margin-right: 4%;
+			background-color: rgba(255, 255, 255, 0.3);
+			padding: 0 20px;
+			border-radius: 10px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			transition: all 0.2s ease-in-out;
+			margin-left: auto;
+			width: 35%;
+			border: 2;
+			animation: fadeSeachIn 0.7s ease forwards;
+
+			// padding-right: 20%;
+			&:hover {
+				width: 45%;
+				background-color: rgba(255, 255, 255, 0.5);
+				box-shadow: 0 5px 40px rgba(0, 0, 0, 0.2);
+			}
+
+			& img {
+				width: 25px;
+				height: 25px;
+				border-radius: 0% 10px;
+			}
+
+			& img:hover {
+				background-color: rgba(255, 255, 255, 0.5);
+				box-shadow: 0 5px 27px rgba(0, 0, 0, 0.23);
+				transform: translateY(-1px); // 使按钮有点击效果
+				//   0px 0px 8px rgba(0, 0, 255, 0.7)
+			}
+
+			& img:active {
+				box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15); // 按钮按下时的阴影效果
+				transform: translateY(0.5px); // 使按钮按下时向下移动
+			}
+
+			& input {
+				width: 100%;
+				background-color: transparent;
+				border: none;
+				outline: none;
+			}
+		}
+	}
+
+	a {
+		color: #0842a0;
+		font-weight: 700;
+		text-decoration: none;
+		transform: perspective(1px) translateZ(0);
+		transition-duration: 0.2s;
+		transition-property: transform;
+	}
+
+	&__shell {
+		width: 95%;
+		max-height: calc(90% - 25px);
+		background-color: rgba(255, 255, 255, 0.98);
+		margin: 8px auto;
+		border-radius: 10px;
+		overflow: auto;
+		height: 100%;
+		min-height: 50vh;
+		font-size: 18px;
+		animation: fadeIn 0.5s ease forwards;
+		margin-bottom: 67px;
+
+		// 设置默认状态下滚动条透明
+		&::-webkit-scrollbar {
+			width: 10px;
+			background: transparent;
+		}
+
+		&::-webkit-scrollbar-thumb {
+			background: transparent; // 默认状态下滚动条滑块透明
+			border-radius: 5px;
+		}
+
+		// 仅在滚动区域:hover时显示滚动条
+		&:hover {
+			&::-webkit-scrollbar-thumb {
+				background: rgba(0, 0, 0, 0.5); // 鼠标悬停时的滚动条颜色
+				transition: background-color 0.2s ease-in; // 设置背景颜色过渡时间
+			}
+		}
+
+		& table {
+			width: 100%;
+			border-collapse: collapse;
+
+			td {
+				animation: fadeTextIn 0.7s ease forwards;
+				padding: 12px 24px;
+				border-left: 1px var(--table-border-color, #ccc); // 默认颜色作为后备
+				border-bottom: 1px dashed var(--table-border-color, #ccc); // 默认颜色作为后备
+				transition: background-color 0.3s ease-out, text-shadow 0.3s ease-out; // 添加text-shadow到transition
+
+				&:hover {
+					background-color: rgba(0, 0, 255, 0.1); // 鼠标悬停时的背景颜色渐变
+					text-shadow: 0px 0px 8px rgba(0, 0, 255, 0.7); // 鼠标悬停时的字体发光
+				}
+			}
+		}
+
+		& th,
+		& td {
+			padding: 20px;
+			padding-left: 40px;
+			text-align: center;
+			// margin-left: 20px;
+			border-spacing: 0px 20px;
+		}
+
+		& thead tr {
+			color: #743481;
+		}
+
+		& thead th {
+			position: sticky;
+			top: 0;
+			background-color: #d5d1de;
+			// border-color: ;
+			cursor: pointer;
+			z-index: 10;
+			padding: 24px 24px;
+			border-left: 1px solid var(--table-border-color, #ccc); // 默认颜色作为后备
+			border-bottom: 1px solid var(--table-border-color, #ccc);
+			transition: background-color 0.3s ease-out, text-shadow 0.3s ease-out; // 添加text-shadow到transition
+
+			&:hover {
+				// background-color: rgba(0, 0, 255, 0.1); // 鼠标悬停时的背景颜色渐变
+				text-shadow: 0px 0px 8px rgba(0, 0, 255, 0.7); // 鼠标悬停时的字体发光
+			}
+		}
+
+		& tbody tr:nth-child(even) {
+			background-color: rgba(0, 0, 0, 0.04);
+		}
+
+		& tbody tr:hover {
+			background-color: rgba(255, 255, 255, 0.6) !important;
+		}
+
+		& .button 
+		{
+			display: inline-block;
+			padding: 8px 10px;
+			border-radius: 14px;
+			text-align: center;
+			cursor: pointer;
+			min-width: 100px;
+			font-weight: 600;
+			transition: background-color 0.3s ease;
+			background: linear-gradient(45deg, #84fab0 30%, #8fd3f4 90%);
+			color: #2c3e50; // 按钮文字颜色
+			border: none; // 移除边框
+			margin-right: 15px;
+			// margin: 4px; // 添加一些外边距以避免按钮之间紧贴
+			outline: none; // 焦点时移除轮廓
+			box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08); // 细微的阴影效果
+
+			&:nth-child(4n) {
+				background-color: #86e49d;
+				color: #006b21;
+			}
+
+			&:nth-child(4n-1) {
+				background-color: #ebc474;
+			}
+
+			&:last-child {
+				margin-right: 0px;
+			}
+
+			&:nth-child(4n+1) {
+				background-color: #beabb0;
+				color: #0842a0;
+			}
+
+			&:nth-child(4n+2) {
+				background-color: #6fcaea;
+			}
+
+			&:hover {
+				box-shadow: 0 7px 14px rgba(50, 50, 93, 0.1), 0 3px 6px rgba(0, 0, 0, 0.08); // 鼠标悬浮时增加阴影效果
+				transform: translateY(-1px); // 使按钮有点击效果
+			}
+
+			&:active {
+				box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15); // 按钮按下时的阴影效果
+				transform: translateY(0.5px); // 使按钮按下时向下移动
+			}
+		}
+	}
+
+	// 分页控件的样式
+	&__pagination 
+	{
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding: 15px 20px;
+		// border-radius: 90px;
+		background-color: rgba(255, 255, 255, 0.2);
+		border-top: 1px solid rgba(0, 0, 0, 0.1);
+		margin-top: 5px;
+		height: 10px;
+		width: 97%;
+
+		&__info 
+		{
+			font-size: 16px;
+			color: #0842a0;
+			&:hover
+			{
+				text-shadow: 0px 0px 2px #0842a0;
+			}
+		}
+
+		&__controls {
+			display: flex;
+			align-items: center;
+
+			&__button {
+				padding: 8px 12px;
+				margin: 0 5px;
+				background-color: #84fab0;
+				border: none;
+				border-radius: 5px;
+				cursor: pointer;
+				transition: background-color 0.3s;
+				// width: 70px;
+
+				&:hover {
+					background-color: #8fd3f4;
+				}
+
+				&:disabled {
+					background-color: #ccc;
+					cursor: default;
+				}
+			}
+
+			&__input {
+				width: 50px;
+				padding: 8px;
+				margin-left: 5px;
+				margin-right: 5px;
+				border-radius: 5px;
+				border: 1px solid #ccc;
+			}
+		}
+		
+	}
+	.pretty-table__pagination__select {
+		margin-left: 10px;
+		margin-right: 10px;
+		padding: 5px;
+		border-radius: 5px;
+		border: 1px solid #ccc;
+		cursor: pointer; // 添加鼠标指针样式
+	  
+		&:hover {
+		  border: 1px solid #0842a0;
+		  box-shadow: 0 0 5px rgba(0, 66, 160, 0.3); // 添加轻微的阴影效果
+		}
+	  
+		&:focus {
+		  outline: none; // 移除默认的焦点轮廓
+		  border-color: #0842a0;
+		  background-color: #f0f0f0; // 轻微改变背景颜色
+		}
+	  
+		&:disabled {
+		  background-color: #e0e0e0;
+		  color: #a0a0a0;
+		}
+	  
+		option {
+		  font-size: 14px; // 调整选项字体大小
+		  color: #333; // 调整选项字体颜色
+		}
+	  }
+	  
+	  
+	.pretty-table__footer {
+		width: 100%;
+		padding: 10px 10px; // 根据需要调整内边距
+		box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1); // 可选，为底部添加阴影
+		background-color: #f9f9f9; // 根据需要调整背景颜色
+		position: absolute;
+		bottom: 0; // 固定在底部
+		left: 0;
+	}
+
+}
